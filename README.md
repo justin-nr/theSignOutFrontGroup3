@@ -1,0 +1,1 @@
+- Got a Linked List, nothing big however.
