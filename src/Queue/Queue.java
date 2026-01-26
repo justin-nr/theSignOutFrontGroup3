@@ -1,29 +1,28 @@
 package Queue;
 
 public class Queue {
+    public Node head;
 
-    Node head = null;
-
-    Queue() {
+    public Queue() {
         head = null;
     }
 
-    Queue(String contents) {
-        head = new Node(contents);
+    public Queue(Node head) {
+        this.head = head;
     }
 
     //append class
-    void append(String contents) {
-        System.out.println("Adding " + contents);
+    public void append(Node node) {
+        System.out.println("Adding " + node.toString());
         if (head == null) {
-            head = new Node(contents);
+            head = node;
         } else {
             Node currentNode = head;
             while (currentNode.next != null) {
                 System.out.println(currentNode.toString());
                 currentNode = currentNode.next;
             }
-            currentNode.next = new Node(contents);
+            currentNode.next = node;
         }
     }
 
@@ -40,15 +39,3 @@ public class Queue {
     }
 }
 
-//Node class
-class Node {
-    Node next = null;
-
-    public Node(String contents) {
-
-    }
-
-    public String toString() {
-        return "";
-    }
-}
