@@ -45,6 +45,7 @@ class Node {
     Node next = null;
 
     public Node(String contents) {
+
     }
 
     public String toString() {
