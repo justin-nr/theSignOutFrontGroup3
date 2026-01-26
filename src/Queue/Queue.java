@@ -17,10 +17,10 @@ public class Queue {
         System.out.println("Adding " + contents);
         if (head == null) {
             head = new Node(contents);
-        }else{
+        } else {
             Node currentNode = head;
-            while (currentNode.next !=null){
-                System.out.println(currentNode.data);
+            while (currentNode.next != null) {
+                System.out.println(currentNode.toString());
                 currentNode = currentNode.next;
             }
             currentNode.next = new Node(contents);
@@ -33,7 +33,7 @@ public class Queue {
         StringBuilder returnString = new StringBuilder();
         Node currentNode = head;
         while (currentNode != null) {
-            returnString.append(currentNode.data + " -> ");
+            returnString.append(currentNode.toString() + " -> ");
             currentNode = currentNode.next;
         }
         return returnString.toString();
@@ -42,11 +42,12 @@ public class Queue {
 
 //Node class
 class Node {
-    String data;
     Node next = null;
 
-    Node(String contents) {
-        data = contents;
+    public Node(String contents) {
+    }
 
+    public String toString() {
+        return "";
     }
 }
