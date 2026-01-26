@@ -1,11 +1,12 @@
 public class SlideShow {
     int slideNumber;
     LinkedList list;
+
     SlideShow() {
         slideNumber = 0;
         list = new LinkedList();
     }
-    SlideShow(String[] intdata, int uptime) {
+    SlideShow(String[] intdata, float uptime) {
         list = new LinkedList();
         for (int i = 0; i < intdata.length; i++) {
             String toAdd = intdata[i];
@@ -20,13 +21,13 @@ class LinkedList {
     // Empty Constructor.
     LinkedList() {}
     // Constructor with base info.
-    LinkedList(String contents, int upTime){
+    LinkedList(String contents, float upTime){
         head = new Node(contents, upTime);
         head.next = head;
     }
 
     // Appends the LinkedList with new info.
-    public void append(String contents, int upTime) {
+    public void append(String contents, float upTime) {
         if (head != null) {
             Node currentNode = head;
             while (currentNode.next != head) {
@@ -41,7 +42,7 @@ class LinkedList {
         }
     }
 
-    public void insert(String contents, int position, int upTime) {
+    public void insert(String contents, int position, float upTime) {
         Node currentNode = head;
         Node lastNode = null;
         int pos = 0;
@@ -93,10 +94,10 @@ class LinkedList {
 class Node {
     Node next;
     String data;
-    int upTime;
+    float upTime;
 
     // Node constructor.
-    Node(String contents, int slideUpTime) {
+    Node(String contents, float slideUpTime) {
         upTime = slideUpTime;
         data = contents;
     }
