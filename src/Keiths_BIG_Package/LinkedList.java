@@ -1,15 +1,17 @@
+package Keiths_BIG_Package;
+
 public class LinkedList {
-    Node head;
+    public Node head;
 
     // Empty Constructor.
-    LinkedList() {}
+    public LinkedList() {}
     // Constructor with base info.
     LinkedList(String contents, float upTime){
         head = new Node(contents, upTime);
         head.next = head;
     }
 
-    // Appends the LinkedList with new info.
+    // Appends the Keiths_BIG_Package.LinkedList with new info.
     public void append(String contents, float upTime) {
         if (head != null) {
             Node currentNode = head;
@@ -38,6 +40,7 @@ public class LinkedList {
         }
 
         Node newNode = new Node(contents, upTime);
+        assert lastNode != null;
         lastNode.next = newNode;
         newNode.next = currentNode;
     }
@@ -78,14 +81,3 @@ public class LinkedList {
     }
 }
 
-class Node {
-    Node next;
-    String data;
-    float upTime;
-
-    // Node constructor.
-    Node(String contents, float slideUpTime) {
-        upTime = slideUpTime;
-        data = contents;
-    }
-}
