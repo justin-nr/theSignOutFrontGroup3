@@ -9,5 +9,6 @@ public class PersonScheduleBlock {
     public PersonScheduleBlock(String label, int hours) {
         this.label = label;
         this.hours = hours;
+        events = new ArrayList<>();
     }
 }
