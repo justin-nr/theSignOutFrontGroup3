@@ -24,6 +24,23 @@ public class SlideShow {
         list.append(info, upTime);
     }
 
+    public Node getNodeFromCurrentSecond (int second) {
+        Node currentNode = list.head;
+        int timePassed = 0;
+        int timeSpentOnSlide = 0;
+
+        while (timePassed < second) {
+            timePassed ++;
+            timeSpentOnSlide ++;
+
+            if (currentNode.upTime < timeSpentOnSlide) {
+                currentNode = currentNode.next;
+                timeSpentOnSlide = 0;
+            }
+        }
+        return currentNode;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -34,7 +51,11 @@ public class SlideShow {
             currentNode = currentNode.next;
         }
         builder.append(currentNode.data).append(" -> ");
-        builder.append("nil");
+        if (currentNode.next == list.head) {
+            builder.append("(Circle Linked List)");
+        } else {
+            builder.append("nil");
+        }
 
         return builder.toString();
     }

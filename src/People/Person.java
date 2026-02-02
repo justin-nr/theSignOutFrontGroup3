@@ -1,10 +1,15 @@
 package People;
 
+import Keiths_BIG_Package.SlideShow;
+
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Person {
     PersonRole role;
     PersonSchedule schedule;
+    ArrayList<String> slidesSeen;
+    SlideShow show;
     boolean seenSign = false;
     boolean signVisible = false;
     boolean payingAttention;
@@ -16,6 +21,7 @@ public class Person {
         this.role = role;
         this.schedule = new PersonSchedule(this);
         this.secondsSignVisibleMaximum = 5;
+        this.slidesSeen = new ArrayList<>();
 
         this.secondsSignVisible = secondsSignVisibleMaximum;
 
@@ -26,6 +32,7 @@ public class Person {
         this.role = role;
         this.schedule = new PersonSchedule(this);
         this.secondsSignVisibleMaximum = 5;
+        this.slidesSeen = new ArrayList<>();
 
         this.secondsSignVisible = secondsSignVisibleMaximum;
 
@@ -76,7 +83,7 @@ public class Person {
         if (!seenSign) {
             return "PersonType: " + role + " | SeenSign: " + seenSign;
         } else {
-            return "PersonType: " + role + " | SeenSign: " + seenSign + " | Total Sign Viewed Length: " + collectiveSignViewTime;
+            return "PersonType: " + role + " | SeenSign: " + seenSign + " | Total Sign Viewed Length: " + collectiveSignViewTime + " | SEEN: " + slidesSeen.toString();
         }
     }
 }

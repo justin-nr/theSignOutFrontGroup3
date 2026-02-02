@@ -1,3 +1,4 @@
+import Keiths_BIG_Package.SlideShow;
 import People.PeopleProcessExample;
 import People.Person;
 import People.PersonNode;
@@ -43,8 +44,16 @@ public class Main {
                 screen.showPopUp("There has been an error, please fill out the info box correctly. (Do not add a % at the end and keep it within the 0 - 100 range!)");
             }
         }
+        SlideShow show = new SlideShow();
+        show.append("Diddy's Party", 12);
+        show.append("Prison", 12);
+        show.append("Vacation Slide", 12);
+        show.append("Thuggin Club", 12);
+        show.append("What, another slide just for fun.", 12);
 
-        PeopleProcessExample processExample = new PeopleProcessExample(amount, percent);
+        System.out.println(show);
+
+        PeopleProcessExample processExample = new PeopleProcessExample(show, amount, percent);
         processExample.processDay();
     }
 }

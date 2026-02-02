@@ -1,9 +1,12 @@
 package People;
 
+import Keiths_BIG_Package.SlideShow;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 public class PersonSchedule {
+
     ArrayList<PersonScheduleBlock> schedule = new ArrayList<>();
     Person person;
 
@@ -59,6 +62,10 @@ public class PersonSchedule {
                             person.signVisible = true;
                             person.seenSign = true;
                             person.collectiveSignViewTime += new Random().nextInt(1, 5);
+                            boolean b = !person.slidesSeen.contains(person.show.getNodeFromCurrentSecond(second).data);
+                            if (b) {
+                                person.slidesSeen.add(person.show.getNodeFromCurrentSecond(second).data);
+                            }
                             System.out.println("Someone (Coming) began seeing the sign at second: " + second);
                         }));
 
@@ -70,6 +77,10 @@ public class PersonSchedule {
                             person.signVisible = true;
                             person.seenSign = true;
                             person.collectiveSignViewTime += new Random().nextInt(1, 5);
+                            boolean b = !person.slidesSeen.contains(person.show.getNodeFromCurrentSecond(second).data);
+                            if (b) {
+                                person.slidesSeen.add(person.show.getNodeFromCurrentSecond(second).data);
+                            }
                             System.out.println("Someone (Leaving) began seeing the sign at second: " + second);
                         }));
 

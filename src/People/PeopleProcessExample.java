@@ -1,11 +1,15 @@
 package People;
 
+import Keiths_BIG_Package.SlideShow;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 public class PeopleProcessExample {
     ArrayList<Person> people;
     Random random;
+
+
     public PeopleProcessExample() {
         people = new ArrayList<>();
         random = new Random();
@@ -17,13 +21,27 @@ public class PeopleProcessExample {
             people.add(person);
         }
     }
-    public PeopleProcessExample(int maxPeople, int percentPayingAttention) {
+
+    public PeopleProcessExample(SlideShow show) {
+        people = new ArrayList<>();
+        random = new Random();
+
+        for (int i = 0; i < 50; i++) {
+            Person person = new Person(PersonRole.STUDENT);
+            person.schedule.generate(random);
+            person.show = show;
+
+            people.add(person);
+        }
+    }
+    public PeopleProcessExample(SlideShow show, int maxPeople, int percentPayingAttention) {
         people = new ArrayList<>();
         random = new Random();
 
         for (int i = 0; i < maxPeople; i++) {
             Person person = new Person(PersonRole.STUDENT, percentPayingAttention);
             person.schedule.generate(random);
+            person.show = show;
 
             people.add(person);
         }

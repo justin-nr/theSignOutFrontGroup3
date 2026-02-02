@@ -45,16 +45,6 @@ public class LinkedList {
         newNode.next = currentNode;
     }
 
-    // connects the end to the beginning
-    public void connectEndToHead() {
-        Node current = head;
-        while (current.next != head && current.next != null) {
-            current = current.next;
-        }
-        current.next = head;
-    }
-
-
     public int getNodeCount() {
         int value = 0;
         Node currentNode = head;
