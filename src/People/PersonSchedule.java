@@ -57,7 +57,9 @@ public class PersonSchedule {
                         PersonScheduleBlockEventTime.START,
                         (person, second) -> {
                             person.signVisible = true;
-                            System.out.println("Someone began seeing the sign at second: " + second);
+                            person.seenSign = true;
+                            person.collectiveSignViewTime += new Random().nextInt(1, 5);
+                            System.out.println("Someone (Coming) began seeing the sign at second: " + second);
                         }));
 
                 // At the end of the schedule block, run an event for leaving
@@ -66,7 +68,9 @@ public class PersonSchedule {
                         PersonScheduleBlockEventTime.END,
                         (person, second) -> {
                             person.signVisible = true;
-                            System.out.println("Someone began seeing the sign at second: " + second);
+                            person.seenSign = true;
+                            person.collectiveSignViewTime += new Random().nextInt(1, 5);
+                            System.out.println("Someone (Leaving) began seeing the sign at second: " + second);
                         }));
 
                 schedule.add(school);

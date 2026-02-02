@@ -1,3 +1,5 @@
+import People.PeopleProcessExample;
+import People.Person;
 import People.PersonNode;
 import People.PersonRole;
 import Queue.Queue;
@@ -12,14 +14,37 @@ public class Main {
         Screen screen = new Screen();
         screen.window.frame.setVisible(true);
 
-        int amount;
+        int amount = -1;
+        int percent = -1;
 
-        try {
-            amount = Integer.parseInt(screen.createOptionMessage("Possible, sightings:"));
-        } catch (NumberFormatException e) {
-            screen.showPopUp("There has been an error, please fill out the info box correctly.");
-            screen.window.frame.dispose();
-//            throw new RuntimeException(e);
+        while (amount <= -1) {
+            boolean success = false;
+            try {
+                amount = Integer.parseInt(screen.createOptionMessage("How many people will be simulated:"));
+                success = true;
+            } catch (NumberFormatException e) {
+                screen.showPopUp("There has been an error, please fill out the info box correctly. (must be greater than or equal to 0)");
+            }
+
+            if (amount <= -1 && success) {
+                screen.showPopUp("There has been an error, please fill out the info box correctly. (must be greater than or equal to 0)");
+            }
         }
+        while (percent <= -1 | percent > 100) {
+            boolean success = false;
+            try {
+                percent = Integer.parseInt(screen.createOptionMessage("Percent of people paying attention: (0 -> 100)"));
+                success = true;
+            } catch (NumberFormatException e) {
+                screen.showPopUp("There has been an error, please fill out the info box correctly. (Do not add a % at the end and keep it within the 0 - 100 range!)");
+            }
+
+            if (percent <= -1 | percent > 100) {
+                screen.showPopUp("There has been an error, please fill out the info box correctly. (Do not add a % at the end and keep it within the 0 - 100 range!)");
+            }
+        }
+
+        PeopleProcessExample processExample = new PeopleProcessExample(amount, percent);
+        processExample.processDay();
     }
 }

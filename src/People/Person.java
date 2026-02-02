@@ -1,11 +1,16 @@
 package People;
 
+import java.util.Random;
+
 public class Person {
     PersonRole role;
     PersonSchedule schedule;
+    boolean seenSign = false;
     boolean signVisible = false;
+    boolean payingAttention;
     int secondsSignVisibleMaximum;
     int secondsSignVisible;
+    int collectiveSignViewTime = 0;
 
     public Person(PersonRole role) {
         this.role = role;
@@ -13,6 +18,19 @@ public class Person {
         this.secondsSignVisibleMaximum = 5;
 
         this.secondsSignVisible = secondsSignVisibleMaximum;
+
+        int r = new Random().nextInt(3);
+        this.payingAttention = r == 0;
+    }
+    public Person(PersonRole role, int percent) {
+        this.role = role;
+        this.schedule = new PersonSchedule(this);
+        this.secondsSignVisibleMaximum = 5;
+
+        this.secondsSignVisible = secondsSignVisibleMaximum;
+
+        int r = new Random().nextInt(1, 100);
+        this.payingAttention = r <= percent;
     }
 
     public void process(int seconds) {
@@ -41,7 +59,7 @@ public class Person {
                         if (shouldHappen) {
                             // Execute the event!
                             event.happened = true;
-                            if (event.method != null) {
+                            if (event.method != null && payingAttention) {
                                 event.method.execute(this, seconds);
                             }
                         }
@@ -50,6 +68,15 @@ public class Person {
             }
 
             blockStartTime = blockEndTime; // Adjust the start time for the next block
+        }
+    }
+
+    @Override
+    public String toString() {
+        if (!seenSign) {
+            return "PersonType: " + role + " | SeenSign: " + seenSign;
+        } else {
+            return "PersonType: " + role + " | SeenSign: " + seenSign + " | Total Sign Viewed Length: " + collectiveSignViewTime;
         }
     }
 }
