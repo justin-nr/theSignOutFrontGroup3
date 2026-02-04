@@ -17,6 +17,17 @@ public class PeopleProcessExample {
             people.add(person);
         }
     }
+    public PeopleProcessExample(int maxPeople, int percentPayingAttention) {
+        people = new ArrayList<>();
+        random = new Random();
+
+        for (int i = 0; i < maxPeople; i++) {
+            Person person = new Person(PersonRole.STUDENT, percentPayingAttention);
+            person.schedule.generate(random);
+
+            people.add(person);
+        }
+    }
     public void processDay() {
         int secondIncrements = 5;
 
@@ -37,6 +48,7 @@ public class PeopleProcessExample {
         }
 
         for (Person person : people) {
+            System.out.println(person);
             person.schedule.reset();
         }
     }
