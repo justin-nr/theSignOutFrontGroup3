@@ -1,5 +1,4 @@
 import People.PeopleProcessExample;
-import People.Person;
 import People.PersonNode;
 import People.PersonRole;
 import Queue.Queue;
@@ -12,7 +11,9 @@ public class Main {
 
         //shows window
         Screen screen = new Screen();
-        screen.window.frame.setVisible(true);
+        screen.window.frame.setVisible(false);
+
+
 
         int amount = -1;
         int percent = -1;
@@ -45,6 +46,8 @@ public class Main {
         }
 
         PeopleProcessExample processExample = new PeopleProcessExample(amount, percent);
-        processExample.processDay();
+        String results = processExample.processDay();
+        //results pops up after entering info
+        screen.resultsWindow(results);
     }
 }
