@@ -5,7 +5,7 @@ import Queue.Node;
 import java.util.Random;
 
 public class PersonNode extends Node {
-    Person person;
+    public Person person;
     public PersonNode(PersonRole role) {
         super();
 

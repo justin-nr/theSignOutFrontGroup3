@@ -13,17 +13,23 @@ public class Queue {
 
     //append class
     public void append(Node node) {
-        System.out.println("Adding " + node.toString());
+        // System.out.println("Adding " + node.toString());
         if (head == null) {
             head = node;
         } else {
             Node currentNode = head;
             while (currentNode.next != null) {
-                System.out.println(currentNode.toString());
+                // System.out.println(currentNode.toString());
                 currentNode = currentNode.next;
             }
             currentNode.next = node;
         }
+    }
+
+    public Node popHead() {
+        Node head = this.head;
+        this.head = this.head.next;
+        return head;
     }
 
     //overrides & makes info to string

@@ -9,7 +9,6 @@ public class Screen {
 
     public Screen() {
         window = new Window("Results");
-
     }
 
     public Screen(String title) {
