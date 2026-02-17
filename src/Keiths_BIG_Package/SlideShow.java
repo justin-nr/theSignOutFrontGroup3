@@ -2,7 +2,7 @@ package Keiths_BIG_Package;
 
 public class SlideShow {
     int slideNumber;
-    Node currentSlide;
+    SlideShowNode currentSlide;
     int slides;
     LinkedList list;
 
@@ -38,8 +38,8 @@ public class SlideShow {
         list.append(info, upTime);
     }
 
-    public Node getNodeFromCurrentSecond (int second) {
-        Node currentNode = list.head;
+    public SlideShowNode getNodeFromCurrentSecond (int second) {
+        SlideShowNode currentNode = list.head;
         int timePassed = 0;
         int timeSpentOnSlide = 0;
 
@@ -58,7 +58,7 @@ public class SlideShow {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        Node currentNode = list.head;
+        SlideShowNode currentNode = list.head;
 
         while (currentNode.next != null && currentNode.next != list.head) {
             builder.append(currentNode.data).append(" -> ");

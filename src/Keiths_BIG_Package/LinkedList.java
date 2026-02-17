@@ -1,36 +1,36 @@
 package Keiths_BIG_Package;
 
 public class LinkedList {
-    public Node head;
+    public SlideShowNode head;
 
     // Empty Constructor.
     public LinkedList() {}
     // Constructor with base info.
     LinkedList(String contents, float upTime){
-        head = new Node(contents, upTime);
+        head = new SlideShowNode(contents, upTime);
         head.next = head;
     }
 
     // Appends the Keiths_BIG_Package.LinkedList with new info.
     public void append(String contents, float upTime) {
         if (head != null) {
-            Node currentNode = head;
+            SlideShowNode currentNode = head;
             while (currentNode.next != head) {
                 currentNode = currentNode.next;
             }
-            Node node = new Node(contents, upTime);
+            SlideShowNode node = new SlideShowNode(contents, upTime);
             currentNode.next = node;
             node.next = head;
         } else {
-            head = new Node(contents, upTime);
+            head = new SlideShowNode(contents, upTime);
             head.next = head;
         }
     }
 
     // append at a specific position
     public void insert(String contents, int position, float upTime) {
-        Node currentNode = head;
-        Node lastNode = null;
+        SlideShowNode currentNode = head;
+        SlideShowNode lastNode = null;
         int pos = 0;
 
         while (currentNode.next != null && currentNode.next != head && pos != position) {
@@ -39,7 +39,7 @@ public class LinkedList {
             pos++;
         }
 
-        Node newNode = new Node(contents, upTime);
+        SlideShowNode newNode = new SlideShowNode(contents, upTime);
         assert lastNode != null;
         lastNode.next = newNode;
         newNode.next = currentNode;
@@ -47,7 +47,7 @@ public class LinkedList {
 
     public int getNodeCount() {
         int value = 0;
-        Node currentNode = head;
+        SlideShowNode currentNode = head;
 
         while (currentNode.next != null && currentNode.next != head) {
             value += 1;
@@ -60,8 +60,8 @@ public class LinkedList {
     }
 
     //Gets last node in the linked list
-    public Node getLastNode() {
-        Node currentNode = head;
+    public SlideShowNode getLastNode() {
+        SlideShowNode currentNode = head;
 
         while (currentNode.next != null && currentNode.next != head) {
             currentNode = currentNode.next;

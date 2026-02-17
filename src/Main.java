@@ -45,9 +45,7 @@ public class Main {
             }
         }
 
-        PeopleProcessExample processExample = new PeopleProcessExample(amount, percent);
-        String results = processExample.processDay();
-        //results pops up after entering info
-        screen.resultsWindow(results);
+        Process process = new Process(amount, 20, percent);
+        screen.resultsWindow(process.processDay(5));
     }
 }
