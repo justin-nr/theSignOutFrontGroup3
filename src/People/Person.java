@@ -1,6 +1,6 @@
 package People;
 
-import Keiths_BIG_Package.SlideShow;
+import SlideShow.SlideShow;
 
 import java.util.ArrayList;
 import java.util.Random;
