@@ -16,8 +16,8 @@ public class Main {
         Screen screen = new Screen();
         screen.window.frame.setVisible(false);
 
-        int numberOfSlides = screen.requestInt("How many slides are up on the sign on any given day?", "Please enter a realistic number.", 1, 100);
-        int amount = screen.requestInt("How many students are estimated to pass the sign each day?", "Please enter a realistic number.", 1, 1500);
+        int numberOfSlides = screen.requestInt("How many slides are up on the sign on any given day?", "Please enter a realistic number.", 1, 1500);
+        int amount = screen.requestInt("How many students are estimated to pass the sign each day?", "Please enter a realistic number.", 1, 500);
         int percentPayingAttention = screen.requestInt("What percent of students are estimated to pay attention to the sign?", "Please enter a percentage between 0 and 100.", 0, 100);
 
         String[] modeOptions = {
