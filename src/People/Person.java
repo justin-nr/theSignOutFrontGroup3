@@ -7,14 +7,14 @@ import java.util.Random;
 
 public class Person {
     PersonRole role;
-    PersonSchedule schedule;
-    ArrayList<String> slidesSeen;
+    public PersonSchedule schedule;
     SlideShow show;
     boolean seenSign = false;
     public boolean signVisible = false;
     boolean payingAttention;
     public int secondsSignVisibleMaximum;
     public int secondsSignVisible;
+    public ArrayList<String> slidesSeen;
     int collectiveSignViewTime = 0;
 
     public Person(PersonRole role) {
@@ -27,7 +27,10 @@ public class Person {
 
         int r = new Random().nextInt(3);
         this.payingAttention = r == 0;
+
+        slidesSeen = new ArrayList<>();
     }
+
     public Person(PersonRole role, int percent) {
         this.role = role;
         this.schedule = new PersonSchedule(this);
@@ -38,6 +41,8 @@ public class Person {
 
         int r = new Random().nextInt(1, 100);
         this.payingAttention = r <= percent;
+
+        slidesSeen = new ArrayList<>();
     }
 
     public void process(int seconds) {
@@ -76,6 +81,10 @@ public class Person {
 
             blockStartTime = blockEndTime; // Adjust the start time for the next block
         }
+    }
+
+    public void setShow(SlideShow show) {
+        this.show = show;
     }
 
     @Override
