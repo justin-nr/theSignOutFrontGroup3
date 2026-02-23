@@ -7,15 +7,18 @@ public class SlideShow {
     SlideShowNode currentSlide;
     int slides;
     LinkedList list;
+    public int size; // keith why didn't you add this bro
 
     public SlideShow() { // OMG OMG WE MADE A SLIDE!!!! 🤯🤯🤯🤯🤯
         slideNumber = 0;
         list = new LinkedList();
+        size = 0;
     }
 
     public SlideShow(String[] initialData, float uptime) { // Slide show with info
         list = new LinkedList();
 
+        size = initialData.length;
         for (int i = 0; i < initialData.length; i++) {
             String toAdd = initialData[i];
             list.append(toAdd, uptime);

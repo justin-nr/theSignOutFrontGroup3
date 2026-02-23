@@ -44,7 +44,7 @@ public class PersonSchedule {
                 studentHours -= hoursCache;
 
                 // An hour to get ready
-                schedule.add(new PersonScheduleBlock("Wakeup", 1)); // 1
+                schedule.add(new PersonScheduleBlock("Wakeup", random.nextInt(1, 3))); // 1
                 studentHours--;
 
                 // AT SCHOOL!!!
@@ -72,14 +72,20 @@ public class PersonSchedule {
                         "SchoolExiting",
                         PersonScheduleBlockEventTime.END,
                         (person, second) -> {
-                            person.signVisible = true;
-                            person.seenSign = true;
-                            person.collectiveSignViewTime += new Random().nextInt(1, 5);
-                            boolean b = !person.slidesSeen.contains(person.show.getNodeFromCurrentSecond(second).data);
-                            if (b) {
-                                person.slidesSeen.add(person.show.getNodeFromCurrentSecond(second).data);
+                            int hash = (second * 0x45d9f3b) ^ person.hashCode();
+
+                            // hash is divisible by 4, 25% of the time
+                            // demon math because i didn't wanna pass a random to a schedule block event lmao
+                            if ((hash & 3) == 0) {
+                                person.signVisible = true;
+                                person.seenSign = true;
+                                person.collectiveSignViewTime += new Random().nextInt(1, 5);
+                                boolean b = !person.slidesSeen.contains(person.show.getNodeFromCurrentSecond(second).data);
+                                if (b) {
+                                    person.slidesSeen.add(person.show.getNodeFromCurrentSecond(second).data);
+                                }
+                                System.out.println("Someone (Leaving) began seeing the sign at second: " + second);
                             }
-                            System.out.println("Someone (Leaving) began seeing the sign at second: " + second);
                         }));
 
                 schedule.add(school);

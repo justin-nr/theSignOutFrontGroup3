@@ -15,12 +15,15 @@ public class Process {
     Queue students;
 
     SlideShow slideshow;
+    public ArrayList<String> slidesSeenEveryone;
 
     public Process(int numStudents, int numSlides, int percentPayingAttention) {
         this.numStudents = numStudents;
         this.percentPayingAttention = percentPayingAttention;
 
         slideshow = new SlideShow();
+
+        slidesSeenEveryone = new ArrayList<>();
 
         ArrayList<String> slideshowNames = new ArrayList<>();
 
@@ -62,6 +65,10 @@ public class Process {
                             }
                             previousNode = node;
                         }
+                        if (!slidesSeenEveryone.contains(node.data)) {
+                            slidesSeenEveryone.add(node.data);
+                            System.out.println("DASHDSAASDHHASDIHASDIUGASDIUGYIUYGAFSDIUSADGGUYI");
+                        }
                     }
                     student.signVisible = false;
                     student.secondsSignVisible = student.secondsSignVisibleMaximum;
@@ -73,7 +80,29 @@ public class Process {
         }
 
         StringBuilder results = new StringBuilder();
-        results.append("Results\n");
+        results.append("Broad Results\n");
+        results.append("------------------\n");
+
+        double aggregatePercentage = 0;
+        int studentCount = 0;
+
+        Node statsNode = students.head;
+        while (statsNode != null) {
+            Person student = ((PersonNode) statsNode).person;
+
+            double seenCount = student.slidesSeen.size();
+            double percentSeen = (seenCount / slideshow.size) * 100.0;
+
+            aggregatePercentage += percentSeen;
+            studentCount++;
+            statsNode = statsNode.next;
+        }
+
+        double averageSeen = (studentCount > 0) ? (aggregatePercentage / studentCount) : 0;
+
+        results.append("Average slide percentage seen by a student today: ").append(averageSeen).append("%").append("\n");
+        results.append("Total percentage of slides seen by all students today: ").append(((float) slidesSeenEveryone.size() / slideshow.size) * 100f).append("%");
+        results.append("\n\nFine Results\n");
         results.append("------------------\n");
 
         Node currentNode = students.head;

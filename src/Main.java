@@ -3,6 +3,7 @@ import People.PersonNode;
 import People.PersonRole;
 import Queue.Queue;
 import Screen.Screen;
+import Screen.ProcessResult;
 
 import javax.swing.*;
 
@@ -15,53 +16,57 @@ public class Main {
         Screen screen = new Screen();
         screen.window.frame.setVisible(false);
 
-        int amount = -1;
-        int percent = -1;
+        int numberOfSlides = screen.requestInt("How many slides are up on the sign on any given day?", "Please enter a realistic number.", 1, 100);
+        int amount = screen.requestInt("How many students are estimated to pass the sign each day?", "Please enter a realistic number.", 1, 1500);
+        int percentPayingAttention = screen.requestInt("What percent of students are estimated to pay attention to the sign?", "Please enter a percentage between 0 and 100.", 0, 100);
 
-//        System.out.println(screen.createOptionMessage("How many people will be simulated:"));
+        String[] modeOptions = {
+                "Day",
+                "Week",
+                "Cancel"
+        };
 
-        while (amount <= -1) {
-            boolean success = false;
-            try {
-                String hold = screen.createOptionMessage("How many people will be simulated:");
-                System.out.println(hold==null);
-                if (hold == null)  {
-                    System.exit(0);
-                } else  {
-                    amount = Integer.parseInt(hold);
-                    success = true;
-                }
-            } catch (NumberFormatException e) {
-                screen.showPopUp("There has been an error, please fill out the info box correctly. (must be greater than or equal to 0)");
-//                throw e;
-            }
+        int modeSelection = JOptionPane.showOptionDialog(
+                screen.window.frame,
+                "Would you like to simulate a day or a week?",
+                "Input",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                modeOptions,
+                modeOptions[0]
+        );
 
-            if (amount <= -1 && success) {
-                screen.showPopUp("There has been an error, please fill out the info box correctly. (must be greater than or equal to 0)");
-            }
-        }
-        while (percent <= -1 | percent > 100) {
-            boolean success = false;
-            try {
-                String hold = screen.createOptionMessage("Percent of people paying attention: (0 -> 100)");
-                System.out.println(hold==null);
-                if (hold == null) {
-                    System.exit(0);
-                } else  {
-                    percent = Integer.parseInt(hold);
-                    success = true;
-                }
-            } catch (NumberFormatException e) {
-                screen.showPopUp("There has been an error, please fill out the info box correctly. (Do not add a % at the end and keep it within the 0 - 100 range!)");
-            }
-
-            if (percent <= -1 | percent > 100) {
-                screen.showPopUp("There has been an error, please fill out the info box correctly. (Do not add a % at the end and keep it within the 0 - 100 range!)");
-            }
+        if (modeSelection == JOptionPane.CLOSED_OPTION || modeSelection == 2) {
+            System.exit(0);
+            return;
         }
 
-        Process process = new Process(amount, 20, percent);
-        screen.resultsWindow(process.processDay(5));
-        System.exit(0);
+        switch (modeSelection) {
+            case 0:
+                // Day
+                Process process = new Process(amount, numberOfSlides, percentPayingAttention);
+                screen.resultsWindow(process.processDay(5));
+                System.exit(0);
+                break;
+            case 1:
+                // Week
+                Process processMondayWednesday = new Process(amount, numberOfSlides, percentPayingAttention);
+                Process processTuesdayThursday = new Process(amount, numberOfSlides, percentPayingAttention);
+                Process processFriday = new Process((int) (amount * 0.35), numberOfSlides, (int) (percentPayingAttention * 0.9));
+
+                ProcessResult[] results = new ProcessResult[5];
+
+                results[0] = new ProcessResult("Monday", processMondayWednesday.processDay(10));
+                results[1] = new ProcessResult("Tuesday", processTuesdayThursday.processDay(10));
+                results[2] = new ProcessResult("Wednesday", processMondayWednesday.processDay(10));
+                results[3] = new ProcessResult("Thursday", processTuesdayThursday.processDay(10));
+                results[4] = new ProcessResult("Friday", processFriday.processDay(25));
+
+                screen.resultsWindowWeek(results);
+                System.exit(0);
+
+                break;
+        }
     }
 }
