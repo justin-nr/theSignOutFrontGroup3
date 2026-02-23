@@ -1,5 +1,5 @@
-import Keiths_BIG_Package.SlideShowNode;
-import Keiths_BIG_Package.SlideShow;
+import SlideShow.SlideShowNode;
+import SlideShow.SlideShow;
 import People.Person;
 import People.PersonConstants;
 import People.PersonNode;

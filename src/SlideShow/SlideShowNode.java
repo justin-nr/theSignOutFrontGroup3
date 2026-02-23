@@ -1,4 +1,4 @@
-package Keiths_BIG_Package;
+package SlideShow;
 
 public class SlideShowNode {
     public SlideShowNode next;

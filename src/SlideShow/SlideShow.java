@@ -1,4 +1,6 @@
-package Keiths_BIG_Package;
+package SlideShow;
+
+import Queue.Node;
 
 public class SlideShow {
     int slideNumber;
